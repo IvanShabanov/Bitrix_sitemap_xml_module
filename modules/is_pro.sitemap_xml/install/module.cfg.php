@@ -17,11 +17,16 @@ $arModuleCfg = [
 			'default' => 'off'				/* Значение по умолчанию */
 		],
 
+		'AGENT_TIME' => [
+			'type' => 'textarea',
+			'default' => ''
+		],
+
 		'MAIN_URL' => [
 			'type' => 'text',
 			'default' => ''
 		],
-
+		/*
 		'PAGES' => [
 			'type' => 'json',
 			'default' => json_encode(['/'])
@@ -36,11 +41,8 @@ $arModuleCfg = [
 			'type' => 'json',
 			'default' => json_encode([])
 		],
+		*/
 
-		'AGENT_TIME' => [
-			'type' => 'textarea',
-			'default' => ''
-		]
 
 	]
 ];

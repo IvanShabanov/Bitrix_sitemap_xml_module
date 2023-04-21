@@ -64,6 +64,68 @@ foreach ($siteIds as $sId => $sName) {
 
 	$setDefault = false;
 
+	/* Получим все Инфоблоки */
+	$resBlocks = CIBlock::GetList(
+		[
+			'ID',
+			'NAME'
+		],
+		[
+			'SITE_ID' => $sId,
+			'ACTIVE'=>'Y',
+		],
+		true
+	);
+
+	while($ar_res = $resBlocks->Fetch()) {
+		$arrObjects = ['SECTION', 'ELEMENT'];
+		foreach ($arrObjects as $object) {
+			$options_list[] = [
+				'IBLOCK_'.$ar_res['ID'].'_'.$object => [
+					'type' => 'checkbox',
+					'NAME' => Loc::getMessage('ISPRO_SITEMAP_XML_IBLOCK_'.$object),
+					'default' => 'N'
+				]
+			];
+			$options_list[] = [
+				'IBLOCK_'.$ar_res['ID'].'_'.$object.'_PRIORITY' => [
+					'type' => 'text',
+					'NAME' => Loc::getMessage('ISPRO_SITEMAP_XML_IBLOCK_'.$object.'_PRIORITY'),
+					'default' => '1'
+				]
+			];
+			$options_list[] = [
+				'IBLOCK_'.$ar_res['ID'].'_'.$object.'_LASTMOD' => [
+					'type' => 'select',
+					'NAME' => Loc::getMessage('ISPRO_SITEMAP_XML_IBLOCK_'.$object.'_LASTMOD'),
+					'values' => [
+						'lastmod',
+						'Y-m-d',
+						'Y-m-01'
+					],
+					'default' => 'lastmod'
+				]
+			];
+			$options_list[] = [
+				'IBLOCK_'.$ar_res['ID'].'_'.$object.'_CHANGEFREQ' => [
+					'type' => 'select',
+					'NAME' => Loc::getMessage('ISPRO_SITEMAP_XML_IBLOCK_'.$object.'_CHANGEFREQ'),
+					'values' => [
+						'always',
+						'hourly',
+						'daily',
+						'weekly',
+						'monthly',
+						'yearly',
+						'never'
+					],
+					'default' => 'monthly'
+				]
+			];
+		}
+	}
+
+
 	$isConfigurated =
 	\Bitrix\Main\Config\Option::get($arModuleCfg['MODULE_ID'], 'IS_CONFIGURATED', 'N', $sId);
 	if ($isConfigurated != 'Y') {
@@ -255,64 +317,6 @@ $tabControl = new CAdminTabControl(str_replace('.', '_', $arModuleCfg['MODULE_ID
 							true											//ShowFilePath
 						)
 						?>
-					<? elseif ($arOption['type'] == 'json') : ?>
-						<?if ($option_name_def == 'IBLOCKS') {
-							$resBlocks = CIBlock::GetList(
-								[
-									'ID',
-									'NAME'
-								],
-								[
-									'SITE_ID' => $sId,
-									'ACTIVE'=>'Y',
-								],
-								true
-							);
-							?>
-							<table>
-								<tr>
-								<th>Инфоблок</th>
-								<th>Секции</th>
-								<th>Элементы</th>
-								</tr>
-							<?
-							while($ar_res = $resBlocks->Fetch()) {
-							?>
-								<tr>
-									<td><?=$ar_res['NAME'];?></td>';
-									<td>
-										<label>
-											<input type="checkbox" name="option_<?= $option_name ?>[<?=$ar_res['ID']?>][SECTION]" value="Y" <?= ($option[$option_name] == "Y") ? 'checked="checked"' : '' ?> />
-											Вкл секции
-										</label><br>
-										<label>
-											priority
-											<input type="text" name="option_<?= $option_name ?>[<?=$ar_res['ID']?>][priority]" value="1" />
-										</label><br>
-										<label>
-											lastmod
-											<input type="text" name="option_<?= $option_name ?>[<?=$ar_res['ID']?>][lastmod]" value="01.mm.YYYY" />
-										</label><br>
-									<td>
-									<td>
-										<label>
-											<input type="checkbox" name="option_<?= $option_name ?>[<?=$ar_res['ID']?>][DETAIL]" value="Y" <?= ($option[$option_name] == "Y") ? 'checked="checked"' : '' ?> />
-											Вкл элементы
-										</label><br>
-										<label>
-											priority
-											<input type="text" name="option_<?= $option_name ?>[<?=$ar_res['ID']?>][priority]" value="1" />
-										</label><br>
-										<label>
-											lastmod
-											<input type="text" name="option_<?= $option_name ?>[<?=$ar_res['ID']?>][lastmod]" value="01.mm.YYYY" />
-										</label><br>
-									<td>
-
-								</tr>
-							<?}?>
-							</table>
-						<?}?>
 					<? else : ?>
 						<input type="<?= $arOption['type'] ?>" name="option_<?= $option_name ?>" value="<?= HtmlFilter::encode($option[$option_name]) ?>" />
 					<? endif ?>
