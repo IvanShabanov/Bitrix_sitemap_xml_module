@@ -18,8 +18,8 @@ $arModuleCfg = [
 		],
 
 		'AGENT_TIME' => [
-			'type' => 'textarea',
-			'default' => ''
+			'type' => 'text',
+			'default' => '86400'
 		],
 
 		'MAIN_URL' => [

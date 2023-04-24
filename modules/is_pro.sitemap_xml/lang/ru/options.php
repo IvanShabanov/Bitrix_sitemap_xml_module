@@ -19,4 +19,20 @@ $MESS['ISPRO_SITEMAP_XML_SAVE'] = 'Сохранить';
 $MESS['ISPRO_SITEMAP_XML_RESET'] = 'Сбросить все настройки по умолчанию';
 
 
+$MESS['ISPRO_SITEMAP_XML_MAIN_URL'] = 'URL сайта';
+$MESS['ISPRO_SITEMAP_XML_AGENT_TIME'] = 'Интервал запустка агента';
+
+$MESS['ISPRO_SITEMAP_XML_IBLOCK'] = 'Инфоблок: "<b>%NAME%</b>"';
+$MESS['ISPRO_SITEMAP_XML_IBLOCK_SECTION'] = 'Разделы';
+$MESS['ISPRO_SITEMAP_XML_IBLOCK_SECTION_PRIORITY'] = 'Приоритет (от 0 до 1)';
+$MESS['ISPRO_SITEMAP_XML_IBLOCK_SECTION_LASTMOD'] = 'Дата изменения';
+$MESS['ISPRO_SITEMAP_XML_IBLOCK_SECTION_CHANGEFREQ'] = 'Частота изменений';
+
+$MESS['ISPRO_SITEMAP_XML_IBLOCK_ELEMENT'] = 'Элементы';
+$MESS['ISPRO_SITEMAP_XML_IBLOCK_ELEMENT_PRIORITY'] = 'Приоритет (от 0 до 1)';
+$MESS['ISPRO_SITEMAP_XML_IBLOCK_ELEMENT_LASTMOD'] = 'Дата изменения';
+$MESS['ISPRO_SITEMAP_XML_IBLOCK_ELEMENT_CHANGEFREQ'] = 'Частота изменений';
+
+
+
 
